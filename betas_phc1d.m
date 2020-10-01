@@ -36,12 +36,12 @@ kb = 0.1; % normalized Bloch wavenumber
 ck = cos(2*pi*kb); % right-hand constant in the dispersion equation
 
 %% plot the dispersion function:
-plot_dispersion_func_TE(eps1,eps2,kd1,kd2,ck);
+plot_dispersion_func(eps1,eps2,kd1,kd2,ck,'TE');
 
 %% roots of the dispersion equation:
 
 	% dispersion as a function of the squared propagation constant:
-fun = @(x) dispersion_PhC1D_TE(x,eps1,eps2,kd1,kd2,ck);
+fun = @(x) dispersion_PhC1D(x,eps1,eps2,kd1,kd2,ck,'TE');
 
 	% roots in the region [eps1,eps2]:
 nr = 2*(floor(kd2*sqrt(eps2-eps1)/pi)+1); % number of initial points
