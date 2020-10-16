@@ -67,7 +67,7 @@ disp(betas);
 betas = sqrt(betas);
 
 %% calculate and plot fields
-m_ind = 1; % number of mode to plot
+m_ind = 2; % number of mode to plot
 kappa1 = get_kappa(betas(m_ind),eps1);
 kappa2 = get_kappa(betas(m_ind),eps2);
 	% z points in a single period

@@ -72,12 +72,14 @@ disp(betas);
 
 %% dispersion function:
 function f = dispersion_PhC1D(beta2, eps1, eps2, kd1, kd2, C, pol)
+	kappa1 = sqrt(eps1 - beta2);
+	kappa2 = sqrt(eps2 - beta2);
 	k1d = kd1*sqrt(eps1 - beta2);%^2
 	k2d = kd2*sqrt(eps2 - beta2);%^2
 	if strcmp(pol,'TE')
-		tvar = k1d./k2d;
+		tvar = kappa1./kappa2;
 	elseif strcmp(pol,'TM')
-		tvar = (eps2/eps1)*k1d./k2d;
+		tvar = (eps2/eps1)*kappa1./kappa2;
 	end
 	f = cos(k1d).*cos(k2d) - 0.5*(tvar + 1./tvar).*sin(k1d).*sin(k2d) - C;
 end
