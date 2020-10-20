@@ -36,7 +36,7 @@ kb = 0.1; % normalized Bloch wavenumber
 ck = cos(2*pi*kb); % right-hand constant in the dispersion equation
 
 %% plot the dispersion function:
-plot_dispersion_func(eps1,eps2,kd1,kd2,ck,'TE');
+%plot_dispersion_func(eps1,eps2,kd1,kd2,ck,'TE');
 
 %% roots of the dispersion equation:
 
@@ -69,6 +69,10 @@ for k = 0:9
 	end
 end
 disp(betas);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% dispersion function:
 function f = dispersion_PhC1D(beta2, eps1, eps2, kd1, kd2, C, pol)

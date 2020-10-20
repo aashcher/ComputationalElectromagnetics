@@ -117,14 +117,11 @@ function [F,G] = get_fmodal(z, k0, kappa1, kappa2, d1, d2)
 	a2p = 0.5*( a1p*(1+kk)*ed1 + a1m*(1-kk)/ed1 );
 	a2m = 0.5*( a1p*(1-kk)*ed1 + a1m*(1+kk)/ed1 );
 
-	te1 = exp(1i*k0*z(ind1));
-	te2 = exp(1i*k0*z(ind2));
-
-	F(ind1) = te1.*( a1p * exp(1i*kappa1*z(ind1)) + a1m * exp(-1i*kappa1*z(ind1)) );
-	F(ind2) = te2.*( a2p * exp(1i*kappa2*(z(ind2)-d1)) + a2m * exp(-1i*kappa2*(z(ind2)-d1)) );
-	G(ind1) = 1i*te1.*( (k0+kappa1) * a1p * exp(1i*kappa1*z(ind1)) ...
+	F(ind1) = ( a1p * exp(1i*kappa1*z(ind1)) + a1m * exp(-1i*kappa1*z(ind1)) );
+	F(ind2) = ( a2p * exp(1i*kappa2*(z(ind2)-d1)) + a2m * exp(-1i*kappa2*(z(ind2)-d1)) );
+	G(ind1) = 1i*( (k0+kappa1) * a1p * exp(1i*kappa1*z(ind1)) ...
 										+ (k0-kappa1) * a1m * exp(-1i*kappa1*z(ind1)) );
-	G(ind2) = 1i*te2.*( (k0+kappa2) * a2p * exp(1i*kappa2*(z(ind2)-d1)) ...
+	G(ind2) = 1i*( (k0+kappa2) * a2p * exp(1i*kappa2*(z(ind2)-d1)) ...
 										+ (k0-kappa2) * a2m * exp(-1i*kappa2*(z(ind2)-d1)) );
 end
 
