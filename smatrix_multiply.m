@@ -24,9 +24,12 @@ along with ComputationalElectrodynamics. If not, see <https://www.gnu.org/licens
 % SM: composition S-matrix of size 2-by-2
 %% implementation:
 function [SM] = smatrix_multiply(SM1, SM2)
-    tv = 1/(1 - SM1(2,2)*SM2(1,1));
-    SM(2,1) = tv*SM1(2,1)*SM2(2,1);
-    SM(1,1) = SM1(1,1) + tv*SM1(2,1)*SM1(1,2)*SM2(1,1);
-    SM(1,2) = tv*SM2(1,2)*SM1(1,2);
-    SM(2,2) = SM2(2,2) + tv*SM2(1,2)*SM2(2,1)*SM1(2,2);
+	SM = zeros(2,2);
+	tv = 1/(1 - SM1(2,2)*SM2(1,1));
+	SM(2,1) = tv*SM1(2,1)*SM2(2,1);
+	SM(1,1) = SM1(1,1) + tv*SM1(2,1)*SM1(1,2)*SM2(1,1);
+	SM(1,2) = tv*SM2(1,2)*SM1(1,2);
+	SM(2,2) = SM2(2,2) + tv*SM2(1,2)*SM2(2,1)*SM1(2,2);
 end
+
+%%% END %%%
