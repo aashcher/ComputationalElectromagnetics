@@ -23,17 +23,18 @@ along with ComputationalElectrodynamics. If not, see <https://www.gnu.org/licens
 clc;
 clear;
 %% initialization
-wl = 0.55; % wavelength
+wl = 1.0; % wavelength
 wv = 2*pi/wl; % vacuum wavenumber
-theta = pi/9; % propagation angle in the air
+theta = pi/9; % angle of incidence
 kx0 = sin(theta); % in-plane wavevector projection
 pol = 'TE'; % polarization, either 'TE' or 'TM'
 
 %% reflection from a slab with sinusoidally varying refractive index
 % {
-n_sl = 10; % number of slices
+n_sl = 5; % number of slices
 H = 0.25; % slab thickness
-dh = H/n_sl;
+dh = H/n_sl; % slice thickness
+ri_max = 2; % maximum refractive index
 
 wls = 0.4:0.001:0.8; % row of wavelengths for spectrum simulation
 reflection_ST = zeros(numel(wls),2);
@@ -45,7 +46,7 @@ for iwl = 1:numel(wls)
 	eps_2 = 1;
 		% accumulate S-matrix of the slab
 	for is = 1:n_sl
-		ri = 1 + 10*sin(pi*(is+0.5)/n_sl); % sinusoidally varying refractive index
+		ri = 1 + ri_max * sin(pi*(is-0.5)/n_sl); % sinusoidally varying refractive index
 		eps_1 = eps_2;
 		eps_2 = ri^2;
 			% calculate and accumulate slab S- and T- matrices
@@ -65,10 +66,7 @@ for iwl = 1:numel(wls)
 	reflection_ST(iwl,2) = abs((TM(2,1)/TM(2,2))^2); % reflection coefficient from T-matrix
 end
 	% plot reflection spectrum
-plot(wls,reflection_ST(:,1));
-hold on;
-plot(wls,reflection_ST(:,2));
-hold off;
+plot(wls,reflection_ST(:,1),'r-',wls,reflection_ST(:,2),'b-');
 xlabel('\lambda');
 ylabel('R');
 
