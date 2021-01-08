@@ -20,16 +20,16 @@ along with ComputationalElectrodynamics. If not, see <https://www.gnu.org/licens
 % calculate a reflection map of a Fabry-Perot resonator
 %% implementation:
 
-h = 0.5;
+h = 0.5; % layer thickness
 eps_s = 1; % permittivity of the surrounding medium
-eps_l = 4; %
-theta = pi/10;
+eps_l = 4; % slab permittivity
+theta = pi/10; % angle of incidence
 
-kx = sqrt(eps_s)*sin(theta);
-kz_s = sqrt(eps_s - kx^2);
-kz_l = sqrt(eps_l - kx^2);
-Re = ((kz_l - kz_s)/(kz_l + kz_s))^2;
-Rh = ((eps_s*kz_l - eps_l*kz_s)/(eps_s*kz_l + eps_l*kz_s))^2;
+kx = sqrt(eps_s)*sin(theta); % in-plane wavevector projection
+kz_s = sqrt(eps_s - kx^2); % propagation constant in the surrounding medium
+kz_l = sqrt(eps_l - kx^2); % propagation constant in the slab
+Re = ((kz_l - kz_s)/(kz_l + kz_s))^2; % TE power reflection coefficient
+Rh = ((eps_s*kz_l - eps_l*kz_s)/(eps_s*kz_l + eps_l*kz_s))^2; % TM power reflection coefficient
 
 wl = linspace(0.4,0.8,100);
 Te = (1-Re)^2 * ((1-Re)^2 + 4*Re*sin(2*pi*h./wl*kz_l).^2).^(-1);
